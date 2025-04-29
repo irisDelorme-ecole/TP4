@@ -11,6 +11,10 @@ public class Triangle {
 
     }
 
+    private List<Point> getSommets() {
+        return sommets;
+    }
+
     private void setSideLengths() {
         sideLengths = new HashSet<>();
 
@@ -31,4 +35,12 @@ public class Triangle {
                                 - Math.pow(sommets.get(1).getX(), 2) + Math.pow(sommets.get(1).getY(), 2))
         );
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Triangle triangle = (Triangle) o;
+        return Objects.equals(sideLengths, triangle.sideLengths);
+    }
+
 }
