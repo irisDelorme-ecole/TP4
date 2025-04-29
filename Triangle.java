@@ -11,7 +11,7 @@ public class Triangle {
 
     }
 
-    private List<Point> getSommets() {
+    public List<Point> getSommets() {
         return sommets;
     }
 
