@@ -6,6 +6,7 @@ public class Cercle
         this.rayon = rayon;
         setPoints(rayon);
         setAllTriangles(pointsInt);
+        setUniqueTriangles(allTriangles);
     }
 
     private int rayon;
@@ -14,7 +15,7 @@ public class Cercle
 
     private List<Triangle> allTriangles;
 
-    private List<Triangle> uniqueTriangles;
+    private Set<Triangle> uniqueTriangles;
 
     private void setPoints(int rayon){
         pointsInt = new ArrayList<>();
@@ -29,30 +30,29 @@ public class Cercle
         }
     }
 
+    public int getNumUniques(){
+        return uniqueTriangles.size();
+    }
 
     private void setUniqueTriangles(List<Triangle> triangles){
-            ArrayList<Triangle> uniqueTriangles = new ArrayList<>();
+            HashSet<Triangle> uniqueTriangles = new HashSet<>();
 
             for(Triangle triangle : triangles){//check tous les triangles
-                if (!(((triangle.getSommets().get(0).getX() <= 0 && triangle.getSommets().get(1).getX() <= 0 && triangle.getSommets().get(2).getX() <= 0)//si un triangle est entierement dans une moitie du cercle(donc not containing origin.)
-                        || (triangle.getSommets().get(0).getX() >= 0)//like one before, need to make actually readable
-                        || (triangle.getSommets().get(0).getY() <= 0)
-                        || (triangle.getSommets().get(0).getY() >= 0)))
-
-                //si l'origine est sur une arrete du triangle
-                       //voir photo pour reste, can't do too much alone.
-
-                )
-                {
-
+                if (triangle.getSommets().get(0) != triangle.getSommets().get(1) &&
+                        triangle.getSommets().get(2) != triangle.getSommets().get(1) &&
+                        triangle.getSommets().get(0) != triangle.getSommets().get(2) &&
+                        triangle.containsOrigin()){
+                    uniqueTriangles.add(triangle);//should not have rotations because of the set equals().
                 }
+
             }
+            this.uniqueTriangles = uniqueTriangles;
     }
 
 
         public void setAllTriangles(List<Point> set) {
-
-        ArrayList<Point> subset = new ArrayList<>();
+        allTriangles = new ArrayList<>();
+        HashSet<Point> subset = new HashSet<>();
 
             for (int i = 0; i < set.size(); i++) {
                 for (int j = i+1; j < set.size(); j++) {
@@ -60,7 +60,8 @@ public class Cercle
                         subset.add(set.get(i));
                         subset.add(set.get(j));
                         subset.add(set.get(k));
-                        allTriangles.add(new Triangle(subset));
+                        if (subset.size() > 2){
+                            allTriangles.add(new Triangle(subset));}
                         subset.clear();
                     }
                 }
