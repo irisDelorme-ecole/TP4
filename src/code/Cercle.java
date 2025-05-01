@@ -21,16 +21,22 @@ public class Cercle
 
     private void setPoints(int rayon){
         pointsInt = new ArrayList<>();
-        for (int i = 0; i < rayon; i++) {//x
-            for (int j = 0; j < rayon; j++) {//y
-                if (Math.pow(i,2)+Math.pow(j,2)<rayon){//check si vrm in cercle
-                pointsInt.add(new Point(i,j));
-                pointsInt.add(new Point(-i,j));//all sign options, all in cercle cause 360 sim
-                pointsInt.add(new Point(i,-j));
-                pointsInt.add(new Point(-i,-j));
+        pointsInt.add(new Point(0, 0));
+        pointsInt.add(new Point(0, 1));
+        pointsInt.add(new Point(0, -1));
+        pointsInt.add(new Point(1, 0));
+        pointsInt.add(new Point(-1, 0));
+        for (int i = 1; i < rayon; i++) {//x
+            for (int j = 1; j < rayon; j++) {//y
+
+                //check si vrm in cercle
+                        pointsInt.add(new Point(i,j));
+                        pointsInt.add(new Point(-i,j));//all sign options, all in cercle cause 360 sim
+                        pointsInt.add(new Point(i,-j));
+                        pointsInt.add(new Point(-i,-j));
             }}
         }
-    }
+
 
     public int getNumUniques(){
         return uniqueTriangles.size();

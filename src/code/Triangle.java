@@ -23,7 +23,7 @@ public class Triangle {
 
     public boolean containsOrigin() {
         Point origine = new Point(0, 0);
-        if (Objects.equals(sommets.get(0), origine) || sommets.get(1).equals(origine) || sommets.get(2).equals(origine)) {
+        if (origine.equals(sommets.get(0)) || sommets.get(1).equals(origine) || sommets.get(2).equals(origine)) {
             return false;
         }
         return (!(dotProduct(sommets.get(0), sommets.get(1)) >= 0 && dotProduct(sommets.get(0), sommets.get(2)) >= 0 && dotProduct(sommets.get(2), sommets.get(1)) >= 0)) &&

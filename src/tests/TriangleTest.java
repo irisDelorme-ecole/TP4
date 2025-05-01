@@ -59,5 +59,14 @@ class TriangleTest {
 
     @org.junit.jupiter.api.Test
     void testEquals() {
+        Point p = new Point(0,0);
+        Point p2 = new Point(0,0);
+        Point p3 = new Point(0,1);
+        Point p4 = new Point(0,-1);
+        Point p5 = new Point(0,-1);
+        assertTrue(p.equals(p2));
+        assertFalse(p.equals(p3));
+        assertFalse(p.equals(p4));
+        assertFalse(p.equals(p5));
     }
 }
