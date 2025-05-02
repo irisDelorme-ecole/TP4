@@ -1,6 +1,4 @@
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Triangle {
     private final List<Point> sommets;
@@ -22,19 +20,21 @@ public class Triangle {
 
     public boolean containsOrigin(){
         Point origine = new Point(0, 0);
-        if (Objects.equals(sommets.get(0), origine) || sommets.get(1).equals(origine) || sommets.get(2).equals(origine)) {
+        if (sommets.get(0).isOrigine() || sommets.get(1).isOrigine() || sommets.get(2).isOrigine()) {
             return false;
         }
-        return ((!(dotProduct(sommets.get(0), sommets.get(1)) >= 0 && dotProduct(sommets.get(0), sommets.get(2)) >= 0 && dotProduct(sommets.get(2), sommets.get(1)) >= 0)) &&
-                (!(dotProduct(sommets.get(0), sommets.get(1)) <= 0 && dotProduct(sommets.get(0), sommets.get(2)) <= 0 && dotProduct(sommets.get(2), sommets.get(1)) <= 0))) &&
-                !touchesCenter2();
+        return (((dotProduct(sommets.get(0), sommets.get(1)) >= 0 && dotProduct(sommets.get(0), sommets.get(2)) >= 0 && dotProduct(sommets.get(2), sommets.get(1)) >= 0)) &&
+                ((dotProduct(sommets.get(0), sommets.get(1)) <= 0 && dotProduct(sommets.get(0), sommets.get(2)) <= 0 && dotProduct(sommets.get(2), sommets.get(1)) <= 0)))
+                ;
     }
 
     public boolean touchesCenter2(){
-        double angle0 = Math.atan(sommets.get(0).getX()/sommets.get(0).getY());
-        double angle1 = Math.atan(sommets.get(1).getX()/sommets.get(0).getY());
-        double angle2 = Math.atan(sommets.get(2).getX()/sommets.get(0).getY());
-        return (angle0 == -angle1 || angle0 == -angle2 || angle1 == -angle2);
+        if (sommets.get(0).getX() != 0 && sommets.get(0).getY() != 0 && sommets.get(1).getX() != 0 && sommets.get(1).getY() != 0 && sommets.get(2).getX() != 0) {
+            double angle0 = Math.atan(sommets.get(0).getX()/sommets.get(0).getY());
+            double angle1 = Math.atan(sommets.get(1).getX()/sommets.get(0).getY());
+            double angle2 = Math.atan(sommets.get(2).getX()/sommets.get(0).getY());
+            return (angle0 == -angle1 || angle0 == -angle2 || angle1 == -angle2);}
+        return false;
     }
 
     public List<Point> getSommets() {

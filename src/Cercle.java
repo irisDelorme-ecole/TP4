@@ -6,6 +6,7 @@ public class Cercle
         this.rayon = rayon;
         setPoints(rayon);
         setAllTriangles(pointsInt);
+        setUniqueTriangles(allTriangles);
     }
 
     private int rayon;
@@ -14,7 +15,7 @@ public class Cercle
 
     private List<Triangle> allTriangles;
 
-    private List<Triangle> uniqueTriangles;
+    private Set<Triangle> uniqueTriangles;
 
     private void setPoints(int rayon) {
         pointsInt = new ArrayList<>();
@@ -39,10 +40,7 @@ public class Cercle
             HashSet<Triangle> uniqueTriangles = new HashSet<>();
 
             for(Triangle triangle : triangles){//check tous les triangles
-                if (triangle.getSommets().get(0) != triangle.getSommets().get(1) &&
-                        triangle.getSommets().get(2) != triangle.getSommets().get(1) &&
-                        triangle.getSommets().get(0) != triangle.getSommets().get(2) &&
-                        triangle.containsOrigin()){
+                if (triangle.containsOrigin() && !triangle.touchesCenter2()){
                     uniqueTriangles.add(triangle);//should not have rotations because of the set equals().
                 }
 
@@ -52,8 +50,8 @@ public class Cercle
 
 
         public void setAllTriangles(List<Point> set) {
-
-        ArrayList<Point> subset = new ArrayList<>();
+            allTriangles = new ArrayList<>();
+            HashSet<Point> subset = new HashSet<>();
 
             for (int i = 0; i < set.size(); i++) {
                 for (int j = i+1; j < set.size(); j++) {
