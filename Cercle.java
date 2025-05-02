@@ -16,37 +16,38 @@ public class Cercle
 
     private List<Triangle> uniqueTriangles;
 
-    private void setPoints(int rayon){
+    private void setPoints(int rayon) {
         pointsInt = new ArrayList<>();
-        for (int i = 0; i < rayon; i++) {//x
-            for (int j = 0; j < rayon; j++) {//y
-                if (Math.pow(i,2)+Math.pow(j,2)<rayon){//check si vrm in cercle
-                pointsInt.add(new Point(i,j));
-                pointsInt.add(new Point(-i,j));//all sign options, all in cercle cause 360 sim
-                pointsInt.add(new Point(i,-j));
-                pointsInt.add(new Point(-i,-j));
-            }}
+        for (int x = -(rayon-1); x < rayon; x++) {
+            for (int y = -(rayon-1); y < rayon; y++) {
+                if (Math.sqrt(Math.pow(x,2) + Math.pow(y,2)) < rayon) {
+                    pointsInt.add(new Point(x, y));
+                }
+            }
         }
+    }
+        public int getNumTriangles() {
+        return allTriangles.size();
+        }
+
+    public int getNumUniques(){
+        return uniqueTriangles.size();
     }
 
 
-    private void setUniqueTriangles(List<Triangle> triangles){
-            ArrayList<Triangle> uniqueTriangles = new ArrayList<>();
+      private void setUniqueTriangles(List<Triangle> triangles){
+            HashSet<Triangle> uniqueTriangles = new HashSet<>();
 
             for(Triangle triangle : triangles){//check tous les triangles
-                if (!(((triangle.getSommets().get(0).getX() <= 0 && triangle.getSommets().get(1).getX() <= 0 && triangle.getSommets().get(2).getX() <= 0)//si un triangle est entierement dans une moitie du cercle(donc not containing origin.)
-                        || (triangle.getSommets().get(0).getX() >= 0)//like one before, need to make actually readable
-                        || (triangle.getSommets().get(0).getY() <= 0)
-                        || (triangle.getSommets().get(0).getY() >= 0)))
-
-                //si l'origine est sur une arrete du triangle
-                       //voir photo pour reste, can't do too much alone.
-
-                )
-                {
-
+                if (triangle.getSommets().get(0) != triangle.getSommets().get(1) &&
+                        triangle.getSommets().get(2) != triangle.getSommets().get(1) &&
+                        triangle.getSommets().get(0) != triangle.getSommets().get(2) &&
+                        triangle.containsOrigin()){
+                    uniqueTriangles.add(triangle);//should not have rotations because of the set equals().
                 }
+
             }
+            this.uniqueTriangles = uniqueTriangles;
     }
 
 
