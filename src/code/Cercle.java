@@ -19,24 +19,19 @@ public class Cercle
 
     private Set<Triangle> uniqueTriangles;
 
-    private void setPoints(int rayon){
+    private void setPoints(int rayon) {
         pointsInt = new ArrayList<>();
-        pointsInt.add(new Point(0, 0));
-        pointsInt.add(new Point(0, 1));
-        pointsInt.add(new Point(0, -1));
-        pointsInt.add(new Point(1, 0));
-        pointsInt.add(new Point(-1, 0));
-        for (int i = 1; i < rayon; i++) {//x
-            for (int j = 1; j < rayon; j++) {//y
-
-                //check si vrm in cercle
-                        pointsInt.add(new Point(i,j));
-                        pointsInt.add(new Point(-i,j));//all sign options, all in cercle cause 360 sim
-                        pointsInt.add(new Point(i,-j));
-                        pointsInt.add(new Point(-i,-j));
-            }}
+        for (int x = -(rayon-1); x < rayon; x++) {
+            for (int y = -(rayon-1); y < rayon; y++) {
+                if (Math.sqrt(Math.pow(x,2) + Math.pow(y,2)) < rayon) {
+                    pointsInt.add(new Point(x, y));
+                }
+            }
         }
-
+    }
+        public int getNumTriangles() {
+        return allTriangles.size();
+        }
 
     public int getNumUniques(){
         return uniqueTriangles.size();
