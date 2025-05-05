@@ -18,7 +18,15 @@ public class Cercle
     private List<Triangle> allTriangles;
 
     private Set<Triangle> uniqueTriangles;
-
+    public List<Point> getPointsInt() {
+        return pointsInt;
+    }
+    public Set<Triangle> getUniqueTriangles() {
+        return uniqueTriangles;
+    }
+    public int getRayon(){
+        return rayon;
+    }
     private void setPoints(int rayon) {
         pointsInt = new ArrayList<>();
         for (int x = -(rayon-1); x < rayon; x++) {
