@@ -36,8 +36,8 @@ public class Export {
             for(Point p : c.getPointsInt()){
                 g2d.dispose();
                 g2d = myPicture.createGraphics();
-                int xAdjusted = (int)(p.getX()*50) +100;
-                int yAdjusted = (int)(p.getY()*50) +100;
+                int xAdjusted = (int)(p.getX()*50) +50*c.getRayon();
+                int yAdjusted = (int)(p.getY()*50) +50*c.getRayon();
                 g2d.setColor(Color.BLACK);
                 g2d.fillOval(xAdjusted, yAdjusted, 4, 4);}
             ImageIO.write(myPicture, "jpg", f);
@@ -54,29 +54,33 @@ public class Export {
         g.dispose();
         return b;
     }
+
     public void triangleIntoImage(BufferedImage image, Cercle c){
         try{
            int compteurTri = 0;
            for (Triangle t : c.getUniqueTriangles()){
+               if (compteurTri >= 15){
+                   break;
+               } else{
                 BufferedImage tempImage = copyImage(image);
                 Graphics2D g2d = tempImage.createGraphics();
                 List<Point> points = t.getSommets();
                 //line 0-1
                 g2d.setColor(Color.RED);
-                g2d.drawLine(((int)(points.get(0).getX())*50 + 100),(int)(points.get(0).getY())*50 + 100,(int)(points.get(1).getX())*50 + 100, (int)((points.get(1).getY())*50 + 100) );
+                g2d.drawLine(((int)(points.get(0).getX())*50 + 50*c.getRayon()),(int)(points.get(0).getY())*50 + 50*c.getRayon(),(int)(points.get(1).getX())*50 + 50*c.getRayon(), (int)((points.get(1).getY())*50 + 50*c.getRayon()) );
 //line 0-2
                 g2d.dispose();
                g2d = tempImage.createGraphics();
                 g2d.setColor(Color.RED);
-                g2d.drawLine(((int)(points.get(0).getX())*50 + 100),(int)(points.get(0).getY())*50 + 100,(int)(points.get(2).getX())*50 + 100, (int)((points.get(2).getY())*50 + 100) );
+                g2d.drawLine(((int)(points.get(0).getX())*50 + 50*c.getRayon()),(int)(points.get(0).getY())*50 + 50*c.getRayon(),(int)(points.get(2).getX())*50 + 50*c.getRayon(), (int)((points.get(2).getY())*50 + 50*c.getRayon()) );
                 //line 2-1
                 g2d.dispose();
                 g2d = tempImage.createGraphics();
                 g2d.setColor(Color.RED);
-                g2d.drawLine(((int)(points.get(2).getX())*50 + 100),(int)(points.get(2).getY())*50 + 100,(int)(points.get(1).getX())*50 + 100, (int)((points.get(1).getY())*50 + 100) );
+                g2d.drawLine(((int)(points.get(2).getX())*50 + 50*c.getRayon()),(int)(points.get(2).getY())*50 + 50*c.getRayon(),(int)(points.get(1).getX())*50 + 50*c.getRayon(), (int)((points.get(1).getY())*50 + 50*c.getRayon()) );
 
                 ImageIO.write(tempImage , "jpg", new File(pathIn + "triangle" + compteurTri + ".jpg"));
-                compteurTri++;}
+                compteurTri++;}}
         } catch (IOException e){
             e.printStackTrace();
         }
