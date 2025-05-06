@@ -1,4 +1,6 @@
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Triangle {
     private final List<Point> sommets;
@@ -12,29 +14,36 @@ public class Triangle {
         this.sommets = new ArrayList<>(sommets);
 
         setSideLengths();
-
-    }
-    public static double dotProduct(Point a, Point b) {
-        return a.getX() * b.getX() + a.getY() * b.getY();
     }
 
-    public boolean containsOrigin(){
+    public boolean containsOrigin() {
         Point origine = new Point(0, 0);
-        if (sommets.get(0).isOrigine() || sommets.get(1).isOrigine() || sommets.get(2).isOrigine()) {
+        if (Objects.equals(sommets.get(0), origine) || sommets.get(1).equals(origine) || sommets.get(2).equals(origine)) {
             return false;
         }
-        return (((dotProduct(sommets.get(0), sommets.get(1)) >= 0 && dotProduct(sommets.get(0), sommets.get(2)) >= 0 && dotProduct(sommets.get(2), sommets.get(1)) >= 0)) &&
-                ((dotProduct(sommets.get(0), sommets.get(1)) <= 0 && dotProduct(sommets.get(0), sommets.get(2)) <= 0 && dotProduct(sommets.get(2), sommets.get(1)) <= 0)))
-                ;
+
+        double ax = sommets.get(0).getX();
+        double bx = sommets.get(1).getX();
+        double cx = sommets.get(2).getX();
+        double ay = sommets.get(0).getY();
+        double by = sommets.get(1).getY();
+        double cy = sommets.get(2).getY();
+
+        int x = 0;
+        int y = 0;
+
+        double det = (bx - ax) * (cy - ay) - (by - ay) * (cx - ax);
+
+        return  (det * ((bx - ax) * (y - ay) - (by - ay) * (x - ax)) >= 0 &&
+                det * ((cx - bx) * (y - by) - (cy - by) * (x - bx)) >= 0 &&
+                det * ((ax - cx) * (y - cy) - (ay - cy) * (x - cx)) >= 0) && !touchesCenter();
     }
 
-    public boolean touchesCenter2(){
-        if (sommets.get(0).getX() != 0 && sommets.get(0).getY() != 0 && sommets.get(1).getX() != 0 && sommets.get(1).getY() != 0 && sommets.get(2).getX() != 0) {
-            double angle0 = Math.atan(sommets.get(0).getX()/sommets.get(0).getY());
-            double angle1 = Math.atan(sommets.get(1).getX()/sommets.get(0).getY());
-            double angle2 = Math.atan(sommets.get(2).getX()/sommets.get(0).getY());
-            return (angle0 == -angle1 || angle0 == -angle2 || angle1 == -angle2);}
-        return false;
+    public boolean touchesCenter(){
+        double angle0 = Math.atan(sommets.get(0).getX()/sommets.get(0).getY());
+        double angle1 = Math.atan(sommets.get(1).getX()/sommets.get(0).getY());
+        double angle2 = Math.atan(sommets.get(2).getX()/sommets.get(0).getY());
+        return (angle0 == -angle1 || angle0 == -angle2 || angle1 == -angle2);
     }
 
     public List<Point> getSommets() {
@@ -61,10 +70,6 @@ public class Triangle {
                                 - Math.pow(sommets.get(1).getX(), 2) + Math.pow(sommets.get(1).getY(), 2))
         );
     }
-
-
-
-
 
     @Override
     public boolean equals(Object o) {
