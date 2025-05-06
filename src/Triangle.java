@@ -40,10 +40,13 @@ public class Triangle {
     }
 
     public boolean touchesCenter(){
+        Point origine = new Point(0,0);
+        if (!sommets.contains(origine)){
         double angle0 = Math.atan(sommets.get(0).getX()/sommets.get(0).getY());
         double angle1 = Math.atan(sommets.get(1).getX()/sommets.get(0).getY());
         double angle2 = Math.atan(sommets.get(2).getX()/sommets.get(0).getY());
-        return (angle0 == -angle1 || angle0 == -angle2 || angle1 == -angle2);
+        return (angle0 == -angle1 || angle0 == -angle2 || angle1 == -angle2);}
+        return true;
     }
 
     public List<Point> getSommets() {

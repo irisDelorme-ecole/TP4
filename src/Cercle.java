@@ -40,7 +40,7 @@ public class Cercle
             HashSet<Triangle> uniqueTriangles = new HashSet<>();
 
             for(Triangle triangle : triangles){//check tous les triangles
-                if (triangle.containsOrigin() && !triangle.touchesCenter2()){
+                if (triangle.containsOrigin() && !triangle.touchesCenter()){
                     uniqueTriangles.add(triangle);//should not have rotations because of the set equals().
                 }
 
