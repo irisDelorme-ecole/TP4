@@ -34,16 +34,19 @@ public class Triangle {
 
         double det = (bx - ax) * (cy - ay) - (by - ay) * (cx - ax);
 
-        return  (det * ((bx - ax) * (y - ay) - (by - ay) * (x - ax)) >= 0 &&
-                det * ((cx - bx) * (y - by) - (cy - by) * (x - bx)) >= 0 &&
-                det * ((ax - cx) * (y - cy) - (ay - cy) * (x - cx)) >= 0) && !touchesCenter();
+        return  (det * ((bx - ax) * (y - ay) - (by - ay) * (x - ax)) > 0 &&
+                det * ((cx - bx) * (y - by) - (cy - by) * (x - bx)) > 0 &&
+                det * ((ax - cx) * (y - cy) - (ay - cy) * (x - cx)) > 0);
     }
 
     public boolean touchesCenter(){
-        double angle0 = Math.atan(sommets.get(0).getX()/sommets.get(0).getY());
-        double angle1 = Math.atan(sommets.get(1).getX()/sommets.get(0).getY());
-        double angle2 = Math.atan(sommets.get(2).getX()/sommets.get(0).getY());
-        return (angle0 == -angle1 || angle0 == -angle2 || angle1 == -angle2);
+        Point origine = new Point(0,0);
+        if (!sommets.contains(origine)){
+            double angle0 = Math.atan(sommets.get(0).getX()/sommets.get(0).getY());
+            double angle1 = Math.atan(sommets.get(1).getX()/sommets.get(0).getY());
+            double angle2 = Math.atan(sommets.get(2).getX()/sommets.get(0).getY());
+            return (angle0 == -angle1 || angle0 == -angle2 || angle1 == -angle2);}
+        return true;
     }
 
     public List<Point> getSommets() {
