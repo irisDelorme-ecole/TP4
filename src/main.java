@@ -26,7 +26,15 @@ public class main {
         Cercle c = new Cercle(number);
 
         if (reponse == 'O') {
-            new export(c);
+
+            System.out.print("Enter an integer for the max number of images: ");
+            while (!sc.hasNextInt()) {
+                System.out.println("That's not a valid integer. Try again!");
+                sc.next(); // Clear invalid input
+            }
+            int nbImg = sc.nextInt();
+
+            new export(c, nbImg);
         }
 
         System.out.println("Il y a " + c.getNumUniques() + " triangles uniques qui contiennent l'origine dans un cercle de rayon " + number);
