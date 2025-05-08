@@ -1,24 +1,28 @@
 public class Point {
-    private int x;
-    private int y;
-
+    private final double x;
+    private final double y;
 
     public Point(int x, int y){
         this.x = x;
         this.y = y;
-
     }
-    public boolean isOrigine(){
-           return x == 0 && y == 0;
 
-    }
-    public int getX() {
+    public double getX() {
         return x;
     }
 
 
-    public int getY() {
+    public double getY() {
         return y;
     }
 
+    public boolean equals(Point p){
+        if (p == null){
+            return false;
+        }
+        if (p == this){
+            return true;
+        }
+        return x == p.getX() && y == p.getY();
+    }
 }
