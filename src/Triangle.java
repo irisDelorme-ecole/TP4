@@ -54,7 +54,7 @@ public class Triangle {
     }
 
     private void setSideLengths() {
-        sideLengths = new HashSet<>();
+        sideLengths = new TreeSet<>();
 
 
         sideLengths.add(
@@ -74,11 +74,21 @@ public class Triangle {
         );
     }
 
+    public TreeSet<Double> getSidelengths(){
+        return sideLengths;}
+    
+    public static bool AboutEqual(double x, double y) {
+    double epsilon = Math.Max(Math.Abs(x), Math.Abs(y)) * 1E-15;
+    return Math.Abs(x - y) <= epsilon;
+}
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Triangle triangle = (Triangle) o;
-        return Objects.equals(sideLengths, triangle.sideLengths);
+        return AboutEqual(sideLengths.get(1), triangle.getSidelengths.get(1)) &&
+            AboutEqual(sideLengths.get(0), triangle.getSidelengths.get(0)) &&
+            AboutEqual(sideLengths.get(2), triangle.getSidelengths.get(2));
     }
 
 }
