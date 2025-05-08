@@ -11,19 +11,24 @@ public class main {
             sc.next(); // Clear invalid input
         }
         int number = sc.nextInt();
-//
-//        char reponse;
-//        do {
-//            System.out.print("Voulez vous export les triangle en images ? (O/N)");
-//            reponse = sc.next().toUpperCase().charAt(0);
-//            System.out.println("That is not a valid answer (O or N). Try again!");
-//            sc.next();
-//        }
-//        while (reponse != 'O' && reponse != 'N');
-//
-//        System.out.println(reponse);
+
+        char reponse;
+
+        System.out.print("Voulez vous export les triangle en images ? (O/N)");
+        do {
+            reponse = sc.next().toUpperCase().charAt(0);
+            if (reponse != 'O' && reponse != 'N') {
+                System.out.println("That is not a valid answer (O or N). Try again!");
+            }
+        }
+        while (reponse != 'O' && reponse != 'N');
 
         Cercle c = new Cercle(number);
+
+        if (reponse == 'O') {
+            new export(c);
+        }
+
         System.out.println("Il y a " + c.getNumUniques() + " triangles uniques qui contiennent l'origine dans un cercle de rayon " + number);
 
         sc.close();
