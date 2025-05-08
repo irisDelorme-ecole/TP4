@@ -16,7 +16,15 @@ public class Cercle
     private List<Triangle> allTriangles;
 
     private Set<Triangle> uniqueTriangles;
-
+    public List<Point> getPointsInt() {
+        return pointsInt;
+    }
+    public Set<Triangle> getUniqueTriangles() {
+        return uniqueTriangles;
+    }
+    public int getRayon(){
+        return rayon;
+    }
     private void setPoints(int rayon) {
         pointsInt = new ArrayList<>();
         for (int x = -(rayon-1); x < rayon; x++) {
@@ -27,46 +35,43 @@ public class Cercle
             }
         }
     }
-        public int getNumTriangles() {
+    public int getNumTriangles() {
         return allTriangles.size();
-        }
+    }
 
     public int getNumUniques(){
         return uniqueTriangles.size();
     }
 
-
-      private void setUniqueTriangles(List<Triangle> triangles){
-            HashSet<Triangle> uniqueTriangles = new HashSet<>();
+    private void setUniqueTriangles(List<Triangle> triangles){
+        HashSet<Triangle> uniqueTriangles = new HashSet<>();
 
             for(Triangle triangle : triangles){//check tous les triangles
-                if (triangle.containsOrigin() && !triangle.touchesCenter()){
+                if (triangle.containsOrigin() && triangle.touchesCenter()){
                     uniqueTriangles.add(triangle);//should not have rotations because of the set equals().
                 }
-
-            }
-            this.uniqueTriangles = uniqueTriangles;
+        }
+        this.uniqueTriangles = uniqueTriangles;
     }
 
 
-        public void setAllTriangles(List<Point> set) {
-            allTriangles = new ArrayList<>();
-            HashSet<Point> subset = new HashSet<>();
+    public void setAllTriangles(List<Point> set) {
+        allTriangles = new ArrayList<>();
+        HashSet<Point> subset = new HashSet<>();
 
-            for (int i = 0; i < set.size(); i++) {
-                for (int j = i+1; j < set.size(); j++) {
-                    for (int k = j+1; k < set.size(); k++) {
-                        subset.add(set.get(i));
-                        subset.add(set.get(j));
-                        subset.add(set.get(k));
-                        allTriangles.add(new Triangle(subset));
-                        subset.clear();
-                    }
+        for (int i = 0; i < set.size(); i++) {
+            for (int j = i+1; j < set.size(); j++) {
+                for (int k = j+1; k < set.size(); k++) {
+                    subset.add(set.get(i));
+                    subset.add(set.get(j));
+                    subset.add(set.get(k));
+                    if (subset.size() > 2){
+                        allTriangles.add(new Triangle(subset));}
+                    subset.clear();
                 }
             }
+        }
 
-        }//backtracking((?not sure for name) subset generator)
+    }//backtracking((?not sure for name) subset generator)
 
-    }
-
-
+}
