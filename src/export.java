@@ -11,7 +11,7 @@ public class export {
     private static final char fSep = File.separatorChar;
 
     // Chemin d'accès par défaut vers le répertoire des données
-    private static final String pathIn = System.getProperty("user.dir") + fSep + "src" + fSep + "TrianglesExport" + fSep ;
+    private static final String pathIn = System.getProperty("user.dir")  + fSep + "TrianglesExport" + fSep ;
     public export(Cercle c){
         String imagePath = "defaultCircleWithPoints.png";
         try{
@@ -86,7 +86,7 @@ public class export {
     }
 
     public static void main(String[] args) {
-        Cercle c = new Cercle(2);
+        Cercle c = new Cercle(3);
         new export(c);
     }
 }
