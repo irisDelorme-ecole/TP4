@@ -1,9 +1,10 @@
+import geometry.Point;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class export {
@@ -62,7 +63,7 @@ public class export {
                 } else{
                     BufferedImage tempImage = copyImage(image);
                     Graphics2D g2d = tempImage.createGraphics();
-                    List<Point> points = t.getSommets();
+                    List<geometry.Point> points = t.getSommets();
                     //line 0-1
                     g2d.setColor(Color.RED);
                     g2d.drawLine(((int)(points.get(0).getX())*50 + 50*c.getRayon()),(int)(points.get(0).getY())*50 + 50*c.getRayon(),(int)(points.get(1).getX())*50 + 50*c.getRayon(), (int)((points.get(1).getY())*50 + 50*c.getRayon()) );

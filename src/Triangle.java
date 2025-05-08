@@ -1,6 +1,6 @@
+import geometry.Point;
+
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Triangle {
     private final List<Point> sommets;
