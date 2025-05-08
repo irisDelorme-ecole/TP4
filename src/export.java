@@ -8,13 +8,11 @@ import java.io.IOException;
 import java.util.List;
 
 public class export {
-    private static int nbImageMax = 0;
     private static final char fSep = File.separatorChar;
 
     // Chemin d'accès par défaut vers le répertoire des données
     private static final String pathIn = System.getProperty("user.dir") + fSep + "src" + fSep + "TrianglesExport" + fSep ;
-    public export(Cercle c, int nbImage){
-        nbImageMax = nbImage;
+    public export(Cercle c){
         String imagePath = "defaultCircleWithPoints.png";
         try{
             File f = new File(pathIn + imagePath);
@@ -60,7 +58,7 @@ public class export {
         try{
             int compteurTri = 0;
             for (Triangle t : c.getUniqueTriangles()){
-                if (compteurTri >= nbImageMax){
+                if (compteurTri >= 15){
                     break;
                 } else{
                     BufferedImage tempImage = copyImage(image);
@@ -88,5 +86,7 @@ public class export {
     }
 
     public static void main(String[] args) {
+        Cercle c = new Cercle(2);
+        new export(c);
     }
 }

@@ -41,15 +41,17 @@ public class Cercle
         return allTriangles.size();
     }
 
-    public int getNumUniques(){
+    public long getNumUniques(){
         return uniqueTriangles.size();
     }
 
     private void setUniqueTriangles(List<Triangle> triangles){
         HashSet<Triangle> uniqueTriangles = new HashSet<>();
+        List<Triangle> prev = new ArrayList<>();
 
             for(Triangle triangle : triangles){//check tous les triangles
-                if (triangle.containsOrigin() && triangle.touchesCenter()){
+                if (triangle.containsOrigin() && triangle.touchesCenter()){//&& !prev.contains(triangle)
+                   prev.add(triangle);
                     uniqueTriangles.add(triangle);//should not have rotations because of the set equals().
                 }
         }
