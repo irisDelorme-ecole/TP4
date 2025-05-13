@@ -10,7 +10,6 @@ import java.util.List;
 public class export {
     private static final char fSep = File.separatorChar;
     private static int nbImageMax = 0;
-
     // Chemin d'accès par défaut vers le répertoire des données
     private static final String pathIn = System.getProperty("user.dir") + fSep + "src" + fSep + "TrianglesExport" + fSep ;
     public export(Cercle c, int nbImg){
