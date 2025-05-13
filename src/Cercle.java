@@ -50,7 +50,7 @@ public class Cercle
         List<Triangle> prev = new ArrayList<>();
 
             for(Triangle triangle : triangles){//check tous les triangles
-                if (triangle.containsOrigin() && triangle.touchesCenter()){//&& !prev.contains(triangle)
+                if (triangle.containsOrigin()){//&& !prev.contains(triangle)
                    prev.add(triangle);
                     uniqueTriangles.add(triangle);//should not have rotations because of the set equals().
                 }
