@@ -1,6 +1,7 @@
+package geometry;
+
 import java.util.*;
-import geometry.Point;
-import geometry.Point;
+
 /**javadoc par github copilot
  * <p>
  * Représente un cercle et calcule les points et triangles associés à son rayon.
@@ -28,7 +29,7 @@ public class Cercle {
     private Set<Triangle> uniqueTriangles;
 
     /**
-     * Constructeur de la classe Cercle.
+     * Constructeur de la classe geometry.Cercle.
      *
      * @param rayon Le rayon du cercle.
      */

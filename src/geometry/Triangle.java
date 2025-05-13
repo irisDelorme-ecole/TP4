@@ -1,10 +1,10 @@
-import geometry.Point;
+package geometry;
 
 import java.util.*;
 
 /**javadoc par github copilot
  * <p>
- * La classe Triangle représente un triangle défini par ses sommets.
+ * La classe geometry.Triangle représente un triangle défini par ses sommets.
  * Elle fournit des méthodes pour vérifier si le triangle contient l'origine
  * ou touche le centre, ainsi que pour obtenir les sommets et les longueurs des côtés.
  */

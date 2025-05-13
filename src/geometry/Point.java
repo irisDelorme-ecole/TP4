@@ -1,5 +1,7 @@
 package geometry;
 
+import java.util.Objects;
+
 /**javadoc par github copilot
  * <p>
  * Classe représentant un point en 2D avec des coordonnées x et y.
@@ -45,13 +47,14 @@ public class Point {
      * @param p Le point à comparer avec ce point.
      * @return {@code true} si les deux points sont égaux, sinon {@code false}.
      */
-    public boolean equals(Point p) {
+    @Override
+    public boolean equals(Object p) {
         if (p == null) {
             return false;
         }
         if (p == this) {
             return true;
         }
-        return x == p.getX() && y == p.getY();
+        return x == ((Point) p).getX() && y ==((Point) p).getY();
     }
 }

@@ -1,4 +1,6 @@
 
+import geometry.Cercle;
+
 import java.util.Scanner;
 
 /**javadoc par github copilot

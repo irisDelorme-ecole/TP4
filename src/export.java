@@ -1,4 +1,6 @@
+import geometry.Cercle;
 import geometry.Point;
+import geometry.Triangle;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
