@@ -2,6 +2,12 @@ import geometry.Point;
 
 import java.util.*;
 
+/**javadoc par github copilot
+ * <p>
+ * La classe Triangle représente un triangle défini par ses sommets.
+ * Elle fournit des méthodes pour vérifier si le triangle contient l'origine
+ * ou touche le centre, ainsi que pour obtenir les sommets et les longueurs des côtés.
+ */
 public class Triangle {
     private final List<Point> sommets;
 
@@ -10,12 +16,21 @@ public class Triangle {
 
     private Set<Double> sideLengths;
 
+    /**
+     * Constructeur pour créer un triangle avec un ensemble de sommets.
+     *
+     * @param sommets Un ensemble contenant les sommets du triangle.
+     */
     public Triangle(HashSet<Point> sommets) {
         this.sommets = new ArrayList<>(sommets);
-
         setSideLengths();
     }
 
+    /**
+     * Vérifie si le triangle contient le point d'origine (0, 0).
+     *
+     * @return true si le triangle contient l'origine, sinon false.
+     */
     public boolean containsOrigin() {
         Point origine = new Point(0, 0);
         if (Objects.equals(sommets.get(0), origine) || sommets.get(1).equals(origine) || sommets.get(2).equals(origine)) {
@@ -39,6 +54,11 @@ public class Triangle {
                 det * ((ax - cx) * (y - cy) - (ay - cy) * (x - cx)) > 0);
     }
 
+    /**
+     * Vérifie si le triangle touche le centre (origine).
+     *
+     * @return true si le triangle touche le centre, sinon false.
+     */
     public boolean touchesCenter() {
         Point origine = new Point(0, 0);
         if (!sommets.contains(origine)) {
@@ -50,13 +70,20 @@ public class Triangle {
         return true;
     }
 
+    /**
+     * Retourne la liste des sommets du triangle.
+     *
+     * @return Une liste contenant les sommets du triangle.
+     */
     public List<Point> getSommets() {
         return sommets;
     }
 
+    /**
+     * Initialise les longueurs des côtés du triangle.
+     */
     private void setSideLengths() {
         sideLengths = new TreeSet<>();
-
 
         sideLengths.add(
                 Math.sqrt(
@@ -75,14 +102,12 @@ public class Triangle {
         );
     }
 
-    //    public TreeSet<Double> getSidelengths(){
-//        return sideLengths;}
-//
-//    public static bool AboutEqual(double x, double y) {
-//    double epsilon = Math.Max(Math.Abs(x), Math.Abs(y)) * 1E-15;
-//    return Math.Abs(x - y) <= epsilon;
-//}
-//
+    /**
+     * Vérifie si un autre objet est égal à ce triangle.
+     *
+     * @param o L'objet à comparer.
+     * @return true si l'objet est égal à ce triangle, sinon false.
+     */
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) {
@@ -91,5 +116,4 @@ public class Triangle {
         Triangle triangle = (Triangle) o;
         return true;
     }
-
 }

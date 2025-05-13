@@ -1,81 +1,144 @@
 import java.util.*;
 import geometry.Point;
 import geometry.Point;
+/**javadoc par github copilot
+ * <p>
+ * Représente un cercle et calcule les points et triangles associés à son rayon.
+ */
+public class Cercle {
 
-public class Cercle
-{
-    public Cercle(int rayon){
+    /**
+     * Rayon du cercle.
+     */
+    private int rayon;
+
+    /**
+     * Liste des points entiers à l'intérieur du cercle.
+     */
+    private List<Point> pointsInt;
+
+    /**
+     * Liste de tous les triangles possibles formés par les points.
+     */
+    private List<Triangle> allTriangles;
+
+    /**
+     * Ensemble des triangles uniques contenant l'origine.
+     */
+    private Set<Triangle> uniqueTriangles;
+
+    /**
+     * Constructeur de la classe Cercle.
+     *
+     * @param rayon Le rayon du cercle.
+     */
+    public Cercle(int rayon) {
         this.rayon = rayon;
         setPoints(rayon);
         setAllTriangles(pointsInt);
         setUniqueTriangles(allTriangles);
     }
 
-    private int rayon;
-
-    private List<Point> pointsInt;
-
-    private List<Triangle> allTriangles;
-
-    private Set<Triangle> uniqueTriangles;
+    /**
+     * Retourne la liste des points entiers à l'intérieur du cercle.
+     *
+     * @return Liste des points entiers.
+     */
     public List<Point> getPointsInt() {
         return pointsInt;
     }
+
+    /**
+     * Retourne l'ensemble des triangles uniques contenant l'origine.
+     *
+     * @return Ensemble des triangles uniques.
+     */
     public Set<Triangle> getUniqueTriangles() {
         return uniqueTriangles;
     }
-    public int getRayon(){
+
+    /**
+     * Retourne le rayon du cercle.
+     *
+     * @return Rayon du cercle.
+     */
+    public int getRayon() {
         return rayon;
     }
+
+    /**
+     * Initialise les points entiers à l'intérieur du cercle en fonction du rayon.
+     *
+     * @param rayon Le rayon du cercle.
+     */
     private void setPoints(int rayon) {
         pointsInt = new ArrayList<>();
-        for (int x = -(rayon-1); x < rayon; x++) {
-            for (int y = -(rayon-1); y < rayon; y++) {
-                if (Math.sqrt(Math.pow(x,2) + Math.pow(y,2)) < rayon) {
+        for (int x = -(rayon - 1); x < rayon; x++) {
+            for (int y = -(rayon - 1); y < rayon; y++) {
+                if (Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)) < rayon) {
                     pointsInt.add(new Point(x, y));
                 }
             }
         }
     }
+
+    /**
+     * Retourne le nombre total de triangles formés par les points.
+     *
+     * @return Nombre de triangles.
+     */
     public int getNumTriangles() {
         return allTriangles.size();
     }
 
-    public long getNumUniques(){
+    /**
+     * Retourne le nombre total de triangles uniques contenant l'origine.
+     *
+     * @return Nombre de triangles uniques.
+     */
+    public long getNumUniques() {
         return uniqueTriangles.size();
     }
 
-    private void setUniqueTriangles(List<Triangle> triangles){
+    /**
+     * Définit l'ensemble des triangles uniques contenant l'origine.
+     *
+     * @param triangles Liste des triangles à vérifier.
+     */
+    private void setUniqueTriangles(List<Triangle> triangles) {
         HashSet<Triangle> uniqueTriangles = new HashSet<>();
         List<Triangle> prev = new ArrayList<>();
 
-            for(Triangle triangle : triangles){//check tous les triangles
-                if (triangle.containsOrigin()){//&& !prev.contains(triangle)
-                   prev.add(triangle);
-                    uniqueTriangles.add(triangle);//should not have rotations because of the set equals().
-                }
+        for (Triangle triangle : triangles) { // Vérifie tous les triangles
+            if (triangle.containsOrigin()) { // Vérifie si le triangle contient l'origine
+                prev.add(triangle);
+                uniqueTriangles.add(triangle); // Élimine les rotations grâce à l'égalité des ensembles.
+            }
         }
         this.uniqueTriangles = uniqueTriangles;
     }
 
-
+    /**
+     * Définit tous les triangles possibles formés par les points.
+     *
+     * @param set Liste des points à utiliser pour former les triangles.
+     */
     public void setAllTriangles(List<Point> set) {
         allTriangles = new ArrayList<>();
         HashSet<Point> subset = new HashSet<>();
 
         for (int i = 0; i < set.size(); i++) {
-            for (int j = i+1; j < set.size(); j++) {
-                for (int k = j+1; k < set.size(); k++) {
+            for (int j = i + 1; j < set.size(); j++) {
+                for (int k = j + 1; k < set.size(); k++) {
                     subset.add(set.get(i));
                     subset.add(set.get(j));
                     subset.add(set.get(k));
-                    if (subset.size() > 2){
-                        allTriangles.add(new Triangle(subset));}
+                    if (subset.size() > 2) {
+                        allTriangles.add(new Triangle(subset));
+                    }
                     subset.clear();
                 }
             }
         }
-
-    }//backtracking((?not sure for name) subset generator)
-
+    }
 }
