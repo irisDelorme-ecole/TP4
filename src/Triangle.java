@@ -11,11 +11,6 @@ import java.util.*;
 public class Triangle {
     private final List<Point> sommets;
 
-    private List<Double> xSommets;
-    private List<Double> ySommets;
-
-    private Set<Double> sideLengths;
-
     /**
      * Constructeur pour créer un triangle avec un ensemble de sommets.
      *
@@ -23,7 +18,6 @@ public class Triangle {
      */
     public Triangle(HashSet<Point> sommets) {
         this.sommets = new ArrayList<>(sommets);
-        setSideLengths();
     }
 
     /**
@@ -55,65 +49,11 @@ public class Triangle {
     }
 
     /**
-     * Vérifie si le triangle touche le centre (origine).
-     *
-     * @return true si le triangle touche le centre, sinon false.
-     */
-    public boolean touchesCenter() {
-        Point origine = new Point(0, 0);
-        if (!sommets.contains(origine)) {
-            double angle0 = Math.atan(sommets.get(0).getX() / sommets.get(0).getY());
-            double angle1 = Math.atan(sommets.get(1).getX() / sommets.get(0).getY());
-            double angle2 = Math.atan(sommets.get(2).getX() / sommets.get(0).getY());
-            return (angle0 == -angle1 || angle0 == -angle2 || angle1 == -angle2);
-        }
-        return true;
-    }
-
-    /**
      * Retourne la liste des sommets du triangle.
      *
      * @return Une liste contenant les sommets du triangle.
      */
     public List<Point> getSommets() {
         return sommets;
-    }
-
-    /**
-     * Initialise les longueurs des côtés du triangle.
-     */
-    private void setSideLengths() {
-        sideLengths = new TreeSet<>();
-
-        sideLengths.add(
-                Math.sqrt(
-                        Math.pow(sommets.get(0).getX(), 2) + Math.pow(sommets.get(0).getY(), 2)
-                                - Math.pow(sommets.get(1).getX(), 2) + Math.pow(sommets.get(1).getY(), 2))
-        );
-        sideLengths.add(
-                Math.sqrt(
-                        Math.pow(sommets.get(0).getX(), 2) + Math.pow(sommets.get(0).getY(), 2)
-                                - Math.pow(sommets.get(2).getX(), 2) + Math.pow(sommets.get(2).getY(), 2))
-        );
-        sideLengths.add(
-                Math.sqrt(
-                        Math.pow(sommets.get(2).getX(), 2) + Math.pow(sommets.get(1).getY(), 2)
-                                - Math.pow(sommets.get(1).getX(), 2) + Math.pow(sommets.get(1).getY(), 2))
-        );
-    }
-
-    /**
-     * Vérifie si un autre objet est égal à ce triangle.
-     *
-     * @param o L'objet à comparer.
-     * @return true si l'objet est égal à ce triangle, sinon false.
-     */
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Triangle triangle = (Triangle) o;
-        return true;
     }
 }

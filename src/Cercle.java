@@ -83,15 +83,6 @@ public class Cercle {
     }
 
     /**
-     * Retourne le nombre total de triangles formés par les points.
-     *
-     * @return Nombre de triangles.
-     */
-    public int getNumTriangles() {
-        return allTriangles.size();
-    }
-
-    /**
      * Retourne le nombre total de triangles uniques contenant l'origine.
      *
      * @return Nombre de triangles uniques.
